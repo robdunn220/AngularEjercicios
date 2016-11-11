@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fight</title>
+    <script src="angular.js"></script>
+    <script>
+      var app = angular.module('this_app', []);
+      app.controller('MainController', function($scope) {
+        $scope.heroHealth = 10;
+        $scope.dragonHealth = 20;
+
+        $scope.fight = function() {
+          var randNum = Math.random();
+          if (randNum > 0.5) {
+            $scope.dragonHealth -= 5;
+            endGame();
+          }
+          else if (randNum <= 0.5) {
+            $scope.heroHealth -= 5;
+            endGame();
+          }
+        };
+
+        $scope.flight = function() {
+          $scope.heroHealth += 2;
+        };
+
+        function endGame() {
+          if ($scope.heroHealth <= 0) {
+            $scope.message = 'You lose...';
+          }
+
+          else if ($scope.dragonHealth <= 0) {
+            $scope.message = 'You slayed the Dragon!';
+          }
+        }
+      });
+    </script>
+  </head>
+  <body ng-app="this_app" ng-controller="MainController">
+    <label>Hero health: {{heroHealth}}</label><br>
+    <label>Dragon health: {{dragonHealth}}</label><br>
+    <button ng-click="fight()">Fight</button>
+    <button ng-click="flight()">Flight</button>
+    {{message}}
+  </body>
+</html>

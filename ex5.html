@@ -16,20 +16,33 @@ Hints at the bottom of this file.
     .done { text-decoration: line-through; }
     </style>
     <script>
-    // Write JS code here
+      var app = angular.module('my-app', []);
+      app.controller('ToDoListController', function($scope) {
+        $scope.item = '';
+        $scope.items = [
+          {name: 'Stuff'},
+          {name: 'Things'},
+          {name: 'Schwifty'}
+        ]
+
+        $scope.addItem = function() {
+          var itemDescription = $scope.item;
+          var task = {name: itemDescription};
+          $scope.items.push(task);
+          $scope.item = '';
+        };
+      });
     </script>
   </head>
   <body>
     <div ng-app="my-app" ng-controller="ToDoListController">
       <form ng-submit>
-        <input type="text"><button type="submit">Add</button>
+        <input type="text" ng-model="item"><button ng-click="addItem()">Add</button>
       </form>
       <ul>
-        <!-- this is just place holder data -->
-        <li>Task one</li>
-        <li>Task two</li>
-        <li>Task three</li>
+        <li ng-repeat="item in items">{{item.name}}</li>
       </ul>
+    </div>
   </body>
 </html>
 
