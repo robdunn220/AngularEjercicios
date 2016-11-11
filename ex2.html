@@ -9,7 +9,12 @@ Make an app to converts celcius to fahrenheit. No JavaScript is necessary. Hints
     <script src="angular.js"></script>
   </head>
   <body>
-    <!-- write AngularJS template code here -->
+    <div ng-app ng-init="celsius">
+      Enter a temperature in celsius:
+      <input type="number" ng-model="celsius"><br>
+      farenheit = {{celsius * 9 / 5 + 32}}
+      <label></label>
+    </div>
   </body>
 </html>
 
